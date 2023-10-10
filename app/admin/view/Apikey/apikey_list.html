@@ -1,0 +1,66 @@
+{include file='header'}
+
+
+     
+      
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">APIKEY管理 &gt; KEY列表 <span class="page-pretitle">() </span></span>
+    </div>
+    
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Edit</th>
+            <th>api_key</th>
+            <th>limit</th>
+            <th>use_times</th>
+            <th>today_status</th>
+            <th>status</th>
+            <th>error_times</th>
+            <th>comment</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {volist name="list" id="vo" empty="" }
+          <tr>
+            <td>{$vo.id}</td>
+            <td><a href="/{$admin_path}/apikey/edit?id={$vo.id}">[=]</a></td>
+            <td>{$vo.api_key}</td>
+            <td>{$vo.limit}</td>
+            <td>{$vo.use_times}</td>
+            <td>{$vo.today_status}</td>
+            <td>{$vo.status}</td>        
+            <td>{$vo.error_times}</td>          
+            <td>{$vo.comment}</td>                   
+            <td><a href="/{$admin_path}/apikey/delete?id={$vo.id}">[x]</a></td>
+          </tr>
+          {/volist}
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+
+
+    <div class="card-footer clearfix">
+      <ul class="pagination pagination-sm m-0 float-right">
+        {$list|raw}
+      </ul>
+    </div>
+
+  </div>
+
+
+
+
+        
+
+
+
+
+{include file='footer'}

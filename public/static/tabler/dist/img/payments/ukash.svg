@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="100"
+   height="60"
+   version="1.1"
+   id="svg72"
+   sodipodi:docname="ukash.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs76" />
+  <sodipodi:namedview
+     id="namedview74"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="6.9602249"
+     inkscape:cx="49.567364"
+     inkscape:cy="44.251443"
+     inkscape:window-width="1222"
+     inkscape:window-height="960"
+     inkscape:window-x="58"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg72" />
+  <g
+     fill="none"
+     fill-rule="evenodd"
+     id="g70">
+    <rect
+       fill="#FFF"
+       width="100"
+       height="60"
+       rx="4"
+       id="rect64" />
+  </g>
+  <path
+     style="fill:#2ca339;fill-opacity:1;fill-rule:evenodd;stroke-width:5.062"
+     id="path1376"
+     sodipodi:type="arc"
+     sodipodi:cx="19.47068"
+     sodipodi:cy="29.692705"
+     sodipodi:rx="15.694611"
+     sodipodi:ry="14.085588"
+     sodipodi:start="1.2681977"
+     sodipodi:end="1.2450388"
+     sodipodi:open="true"
+     sodipodi:arc-type="arc"
+     d="M 24.147702,43.138319 A 15.694611,14.085588 0 0 1 4.5164789,33.968011 15.694611,14.085588 0 0 1 14.620498,16.296596 15.694611,14.085588 0 0 1 34.368719,25.262281 15.694611,14.085588 0 0 1 24.493373,43.037512" />
+  <path
+     style="fill:#2ca339;fill-opacity:1;fill-rule:evenodd;stroke-width:5.062"
+     d="m 10.485635,37.80928 -2.2980983,7.171454 7.4831583,-4.04119 z"
+     id="path1432" />
+  <text
+     xml:space="preserve"
+     style="font-style:italic;font-weight:bold;font-size:13.9749px;font-family:'Microsoft YaHei';-inkscape-font-specification:'Microsoft YaHei Bold Italic';fill:#2c0039;fill-opacity:1;fill-rule:evenodd;stroke-width:5.05293"
+     x="39.229298"
+     y="35.180172"
+     id="text1488"
+     transform="scale(0.99820882,1.0017944)"
+     inkscape:label="text1488"><tspan
+       sodipodi:role="line"
+       x="39.229298"
+       y="35.180172"
+       id="tspan1490"
+       style="stroke-width:5.05293"
+       inkscape:label="tspan1490">微信支付</tspan></text>
+  <path
+     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:5.062"
+     d="m 14.308116,28.245687 5.25248,5.717124 13.689981,-13.242971 -1.066989,-0.998072 -11.316996,9.566434 c 0,0 -2.457501,0.559793 -2.973668,-0.245492 -0.516168,-0.805285 -1.770489,-2.46769 -1.770489,-2.46769 z"
+     id="path2460" />
+</svg>

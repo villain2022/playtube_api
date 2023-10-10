@@ -1,0 +1,87 @@
+{include file='header'}
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      
+      <div class="card-header">
+        <span class="card-title">APIKEY管理 &gt; 编辑KEY <span class="page-pretitle">
+          (id:{$data[0]['id']})&nbsp;&nbsp;(<a href="/{$data[0]['id']}.html" target="_blank" class="text-blue">点击预览</a>)&nbsp;&nbsp;</span>
+      </div>
+
+
+        <form method="post" action="/{$admin_path}/apikey/editpost">
+            <div class="card-body">
+                
+                <input type="hidden" name="id" value="{$data[0]['id']}"/>
+                
+
+                <div class="form-group mb-3">
+                    <label class="form-label page-pretitle">api_key <code class="text-gray">youtube api key</code></label>
+                    <input type="text" class="form-control rounded-0" name="api_key" placeholder="" value="{$data[0]['api_key']}">
+                </div>
+
+
+
+                <div class="form-group mb-3">
+                    <label class="form-label page-pretitle">limit <code class="text-gray">api当天的最大请求限制</code></label>
+                    <input type="text" class="form-control rounded-0" name="limit"  placeholder="" value="{$data[0]['limit']}">
+                </div>
+
+
+
+                <div class="form-group mb-3">
+                  <label class="form-label page-pretitle">use_times <code class="text-gray">当天已使用请求数，此值必须要小于limit数量，次日0时重置为0</code></label>
+                  <input type="text" class="form-control rounded-0" name="use_times"  placeholder="" value="{$data[0]['use_times']}">
+                </div>
+
+   
+                <div class="form-group mb-3">
+                  <label class="form-label page-pretitle">today_status <code class="text-gray">此key的当天使用状态，1为正常状态，0为已超limit数量，默认为1</code></label>
+                  <label class="form-check form-switch">
+                    
+                    <input class="form-check-input" name="today_status" type="checkbox" {if $data[0]['today_status'] eq 1}checked{/if}>
+                    <code class="text-gray">是否超限</code>
+                  </label>
+              </div>
+
+
+    
+                <div class="form-group mb-3">
+                    <label class="form-label page-pretitle">status <code class="text-gray">当前key的使用状态，1为正常状态，0为暂停使用，默认为1</code></label>
+                    <label class="form-check form-switch">
+                      
+                      <input class="form-check-input" name="status" type="checkbox" {if $data[0]['status'] eq 1}checked{/if}>
+                      <code class="text-gray">是否正常</code>
+                    </label>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label class="form-label page-pretitle">timestamp <code class="text-gray">添加时间，日期：{$data[0]['timestamp']|date="Y-m-d H:i:s"}</code></label>
+                  <input type="text" class="form-control rounded-0" name="timestamp"  placeholder="" value="{$data[0]['timestamp']}">
+                </div>
+
+                <div class="form-group mb-3">
+                  <label class="form-label  page-pretitle">comment <code class="text-gray">备注此key所在的账号等信息,字段为varchar(1000)</code></label>
+                  <textarea class="form-control" name="comment" rows="5" placeholder="">{$data[0]['comment']}</textarea>
+                </div>
+
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-info">Sumbit</button>
+            </div>
+        </form>
+
+  <link href="/static/layui/dist/css/layui.css" rel="stylesheet">
+  <script src="/static/layui/dist/layui.js"></script>
+
+</div>
+
+{include file='footer'}

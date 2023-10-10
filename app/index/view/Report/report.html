@@ -1,0 +1,63 @@
+{include file="/header" /}
+
+<div class="row row-cards mx-2">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title fw-bold">投诉链接</h3>
+      </div>
+
+      <form class="card card-md" action="/report" method="post">
+        <div class="card-body">
+
+          <div class="row">
+            <div class="mb-3">
+              <label class="form-label">链接</label>
+              <input type="text" class="form-control" name="url" placeholder="eg: https://url.com/123.html">
+            </div>
+
+
+            <div class="mb-3">
+              <label class="form-label">邮箱</label>
+              <input type="email" class="form-control" name="email" placeholder="Your Email">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">留言</label>
+              <textarea class="form-control" name="comment" rows="6" placeholder="留言内容.."></textarea>
+            </div>
+
+
+            <div class="mb-3 col-lg-2">
+              <label class="form-label">验证码</label>
+              <div class="input-group mb-2">
+                <span class="input-group-text">
+                  {$cptc_number_1} + {$cptc_number_2} = 
+                </span>
+                <input type="text" class="form-control" placeholder="" name="cptc" autocomplete="off">
+              </div>
+            </div>
+
+            <input type="text" class="d-none" placeholder="" name="cptc_number_1" autocomplete="off" value="{$cptc_number_1}" >
+            <input type="text" class="d-none" placeholder="" name="cptc_number_2" autocomplete="off" value="{$cptc_number_2}">
+            <input type="text" class="d-none" name="hash_str" value="" id="hash_str">
+
+            <div class="card-footer text-start">
+              <button type="submit" class="btn btn-primary">
+                提交
+              </button>
+            </div>
+
+          </div>
+        </from>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/static/js/5e20e1e5ddc34269647ce58a762859e5.js"></script>
+<script language="javascript">
+    timestamp("{$index_timestamp}");
+</script>
+
+{include file="/footer" /}

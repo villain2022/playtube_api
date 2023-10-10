@@ -1,0 +1,73 @@
+{include file="/header" /}
+
+<div class="row g-2 align-items-center">
+  <div class="col mb-3">
+    <h2 class="page-title">
+      首页 / 搜索
+    </h2>
+  </div>
+
+</div>
+
+
+
+<div class="row row-cards mb-3">
+
+  {volist name="list" id="vo"}
+  <div class="col-sm-12 col-lg-4">
+    <div class="card card-sm">
+      <a href="/{$vo.id}.html"  target="_blank" class="d-block"><img src="{if $img_server_switch eq 1}{$img_server_url|raw}{/if}{$vo.thumb|raw}" class="card-img-top"  alt="{$vo.title|raw}"></a>
+      <div class="card-body">
+        <div class="row d-flex align-items-center">
+
+          <div class="col-12  mb-2"  style="min-height:60px;max-height:60px;overflow: hidden;">
+            <a href="/{$vo.id}.html" target="_blank" class="text-dark">
+              <div>{$vo.title|raw}</div>
+            </a>
+            
+          </div>
+
+
+          {if $user_status eq 1}
+          <div class="col-12 mt-2">
+            <span class="ms-3 text-muted">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path>
+                <path d="M16 3v4"></path>
+                <path d="M8 3v4"></path>
+                <path d="M4 11h16"></path>
+                <path d="M11 15h1"></path>
+                <path d="M12 15v3"></path>
+             </svg>
+             {$vo.addtime|date="Y-m-d"}
+            </span>
+            <span class="text-muted  ms-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1"></path>
+                <path d="M12 7v10"></path>
+             </svg>
+              {$vo.price}
+            </span>
+          </div>
+          {/if}
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {/volist}
+
+
+  
+</div>
+<div class="row row-cards">
+  <div class="col-12">
+    {$list|raw}
+
+  </div>
+
+{include file="/footer" /}

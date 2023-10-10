@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Register</title>
+    <meta name="msapplication-TileColor" content=""/>
+    <meta name="theme-color" content=""/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <!-- CSS files -->
+    {load href="/static/tabler/dist/css/tabler.min.css" /}
+    {load href="/static/tabler/dist/css/tabler-flags.min.css" /}
+    {load href="/static/tabler/dist/css/tabler-payments.min.css" /}
+    {load href="/static/tabler/dist/css/tabler-vendors.min.css" /}
+    {load href="/static/tabler/dist/js/tabler.min.js" /}
+    {load href="/static/js/jQuery.js" /}
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
+  </head>
+  <body  class=" d-flex flex-column">
+    <script src="/static/tabler/dist/js/demo-theme.min.js?1674944800"></script>
+    <div class="page page-center">
+      <div class="container container-tight py-4">
+        <div class="text-center mb-4">
+          <a href="/" class="navbar-brand navbar-brand-autodark"><img src="/static/tabler/static/logo.svg" height="36" alt=""></a>
+        </div>
+        <form class="card card-md" action="/user/register_post" method="post">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">创建新账户</h2>
+            <div class="mb-3">
+              <label class="form-label">用户名</label>
+              <input type="text" name="username" id="username" class="form-control form-control" placeholder="Enter username">
+              <div class="invalid-feedback d-none" id="user_notice">此用户名已被注册</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">邮箱</label>
+              <input type="email" name="email" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">用户密码</label>
+              <div class="input-group input-group-flat">
+                <input type="password" name="password" class="form-control"  placeholder="Password" id="pwd" autocomplete="off">
+                <span class="input-group-text">
+                  <a href="#" class="link-secondary" id="eye" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" /></svg>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <input type="text" class="d-none" name="hash_str" value="" id="hash_str">
+            <input type="text" class="d-none" name="ref" value="{$ref_url_str}">
+
+            <div class="form-footer">
+              <button type="submit" class="btn btn-primary w-100">注册账户</button>
+            </div>
+          </div>
+        </form>
+        <div class="text-center text-muted mt-3">
+          已经有账户? <a href="/user/login?ref={$ref_url_str}" tabindex="-1">点此登录</a>
+        </div>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <!-- Tabler Core -->
+    <script src="/static/tabler/dist/js/tabler.min.js?1674944800" defer></script>
+    <script src="/static/tabler/dist/js/demo.min.js?1674944800" defer></script>
+
+
+    <script>
+      var eye = document.getElementById('eye');
+      var pwd = document.getElementById('pwd');
+      var flag = 0;
+      eye.onclick = function() {
+        if (flag == 0) {
+          pwd.type = 'text';
+          flag = 1;
+        } else {
+          pwd.type = 'password';
+          flag = 0;
+        }
+      }
+    </script>
+
+    <script type="text/javascript">
+      $(function () {
+        $("#username").blur(function () {
+          var a = $("#username").val();
+
+
+          //user length
+          if(a.length < 5){
+            $("#username").removeClass("is-valid")
+            $("#username").addClass("is-invalid");
+            $("#user_notice").removeClass("d-none");
+            $("#user_notice").html("用户名太短，长度必须大于等于5");
+
+          }else{
+
+
+            //console.log(a);
+            $.post("/user/username_check",
+            {
+              username:a
+            },
+            function(data,status){
+              res = JSON.parse(data);
+              //console.log(res);
+              if(res["code"] == 0){
+                $("#username").removeClass("is-invalid");
+                $("#username").addClass("is-valid")
+                $("#user_notice").addClass("d-none");
+              }else{
+                $("#username").removeClass("is-valid")
+                $("#username").addClass("is-invalid");
+                $("#user_notice").removeClass("d-none");
+                $("#user_notice").html(res["message"]);
+              }
+              
+            });
+
+          }
+          
+
+        });
+      });
+      </script>
+
+<script type="text/javascript" src="/static/js/5e20e1e5ddc34269647ce58a762859e5.js"></script>
+<script language="javascript">
+    timestamp("{$index_timestamp}");
+</script>
+  </body>
+</html>

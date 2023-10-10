@@ -1,0 +1,433 @@
+{include file="/header" /}
+
+<div class="row g-2 align-items-center">
+  <div class="col mb-3">
+    <ol class="breadcrumb" aria-label="breadcrumbs">
+      <li class="breadcrumb-item"><a href="/">首页</a></li>
+      <li class="breadcrumb-item"><a href="#">{$cate_data[$data[0]['cate_id']-1]['cate_name']|raw}</a></li>
+      <li class="breadcrumb-item active" aria-current="page"></li>
+    </ol>
+  </div>
+
+</div>
+
+
+<div class="row row-cards mb-3">
+  <div class="col-md-9 col-sm-12">
+
+    <div class="card">
+      <div class="card-body ">
+      
+          <div class="col-12">
+            <h1><strong>{$data[0]['title']|raw}</strong></h1>
+          </div>
+
+          <div class="col-12 mb-3">
+            <span class="text-muted">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock-hour-3" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M12 12h3.5"></path>
+                <path d="M12 7v5"></path>
+             </svg>
+             {$data[0]['addtime']|date="Y-m-d"}
+            </span>
+
+
+
+            {if $user_status eq 1}
+            <span class="ms-3 text-muted">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1"></path>
+                <path d="M12 7v10"></path>
+             </svg>
+              {$data[0]['price']}
+            </span>
+            {/if}
+          </div>
+
+
+          <div class="col-12 markdown">
+            {$content_data|raw}
+          </div>
+
+
+          <div class="col-md-12 markdown mt-5">
+            <h3>相关搜索:</h3>
+            <div class="card-body">
+              <div class="btn-list">
+                {volist name="tags_keyword" id="vo"}
+                <a href="/search?keyword={$vo|raw}" class="btn btn-sm">{$vo|raw}</a>
+                {/volist}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 markdown mt-2">
+            <h3>资源信息:</h3>
+            <ul>
+              {$data[0]['file_info']|raw}
+            </ul>
+          </div>
+
+          
+          <div class="col-md-9 markdown mt-3">
+            <h3>下载地址:</h3>
+            <div class="col-md-12">
+              <div class="card border border-0" id="pay_status">
+                
+              </div>
+            </div>
+          </div>
+          
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col-md-3  col-sm-12">
+    <div class="card">
+      <div class="card-body" id="modal_pay_btn">
+
+        {if $user_status eq 1}
+        <div class="text-center  my-3">
+          <span class="display-5  fw-bold">$</span>
+          <span class="display-5   fw-bold">{$data[0]['price']}</span>
+          <span class="display-7 ms-1 text-muted fw-bold">USD</span>
+        </div>
+        <div class="text-center mt-4">
+          <a href="#" class="btn btn-green w-100" data-bs-toggle="modal" data-bs-target="#modal-pay">立即支付</a>
+          
+        </div>
+        {else}
+          <a href="#" class="btn btn-green w-100" data-bs-toggle="modal" data-bs-target="#modal-pay">登录</a>
+        {/if}
+      </div>
+
+
+
+
+
+      <div class="card-body" id="modal_pay_btn">
+        说明：下载采用百度网盘、Microsoft OneDrive或Google Drive随机一种分发链接，需要您了解各种网盘的基础操作！如果链接无效，无法下载请添加微信客服: <strong class="text-red">{$wx_contact|raw}</strong> 或右下角联系网站管理员进行补发，如需邮件发送，请下单后联系客服。
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+
+
+  <div class="row row-cards">
+    <div class="col-md-9 col-sm-12 mb-3 ">
+      <div class="card">
+        <div class="card-body">
+          <ul class="pagination ">
+            <li class="page-item page-prev {if $prev_data_count eq 0}disabled{/if}">
+              <a class="page-link" href="{if $prev_data_count eq 0}#{else}/{$prev_data[0]['id']}.html{/if}" tabindex="-1" {if $prev_data_count eq 0}aria-disabled="true"{/if}>
+                <div class="page-item-subtitle">上一篇</div>
+                {if $prev_data_count eq 0}
+                  <div class="page-item-title">None</div>
+                {else}
+                <div class="page-item-title">{$prev_data[0]['title']}</div>
+                {/if}
+              </a>
+            </li>
+            <li class="page-item page-next {if $next_data_count eq 0}disabled{/if}">
+              <a class="page-link" href="{if $next_data_count eq 0}#{else}/{$next_data[0]['id']}.html{/if}" {if $next_data_count eq 0}aria-disabled="true"{/if}>
+                
+                <div class="page-item-subtitle">下一篇</div>
+                {if $next_data_count eq 0}
+                  <div class="page-item-title">none</div>
+                {else}
+                  <div class="page-item-title">{$next_data[0]['title']}</div>
+                {/if}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<div class="col-md-9  col-sm-12  mb-3">
+  <div class="row row-cards mb-3">
+
+    
+    {volist name="recommand_data" id="vo"}
+    <div class="col-sm-6 col-lg-6">
+      <div class="card card-sm">
+        <a href="/{$vo.id}.html" class="d-block"><img src="{if $img_server_switch eq 1}{$img_server_url|raw}{/if}{$vo.thumb|raw}" class="card-img-top"  alt="{$vo.title|raw}"></a>
+        <div class="card-body">
+          <div class="row d-flex align-items-center">
+
+            <div class="col-12  mb-2" style="min-height:60px;max-height:60px;overflow: hidden;">
+              <a href="/{$vo.id}.html" target="_blank" class="text-dark">
+                <div>{$vo.title|raw}</div>
+              </a>
+              
+              
+            </div>
+            <div class="col-12">
+              <span class="text-muted">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock-hour-3" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                  <path d="M12 12h3.5"></path>
+                  <path d="M12 7v5"></path>
+              </svg>
+              {$vo.addtime|date="Y-m-d"}
+              </span>
+
+
+              {if $user_status eq 1}
+                <span class="ms-3 text-muted">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                    <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1"></path>
+                    <path d="M12 7v10"></path>
+                </svg>
+                  {$vo.price|raw}
+                </span>
+              {/if}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {/volist}
+
+    
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var book_id = {$data[0]['id']};
+        $.post("/pay/pay_status",
+        {
+          id:book_id
+        },
+        function(data,status){
+          $("#pay_status").html(data);
+          if(data.match(/\/download\//g)){
+            $("#modal_pay_btn").html(data);
+          }
+          
+        });
+
+      });
+    </script> 
+
+  </div>
+</div>
+
+<div class="modal modal-blur fade" id="modal-pay" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+
+      {if $user_status eq 1}
+      <div class="modal-header">
+        <h2 class="modal-title  fw-bolder">订单列表</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label fw-bolder">资源名称</label>
+          <input type="text" class="form-control" name="title" disabled placeholder="Your report name" value="{$data[0]['title']}">
+        </div>
+
+        <div class="col-md-12 mt-4">
+          <div class="bg-pay"> <span class="fw-bolder">订单详情</span>
+              <div class="d-flex justify-content-between mt-2"> <span class="fw-500">价格</span> <span>${$data[0]['price']}</span> </div>
+
+
+          
+              
+              <div class="d-flex justify-content-between mt-2 border-top pt-2"> <span class="fw-500">共计 </span> <span class="text-success">${$data[0]['price']}</span> </div>
+          </div>
+      </div>
+
+
+        <div class="mt-4 mb-3  col-xs-12 col-lg-4">
+          <label class="form-label fw-bolder">支付方式</label>
+          <div class="form-selectgroup form-selectgroup-boxes d-flex flex-column">
+            {if $usdt_switch eq 1}
+            <label class="form-selectgroup-item flex-fill">
+              <input type="radio" name="form-payment" value="usdt" class="form-selectgroup-input" id="usdt-input" checked>
+              <div class="form-selectgroup-label d-flex align-items-center p-3">
+                <div class="me-3">
+                  <span class="form-selectgroup-check"></span>
+                </div>
+                <div>
+                  <span class="payment payment-provider-verifone payment-xs me-2"></span>
+                  <strong>USDT</strong>
+                </div>
+              </div>
+            </label>
+            {/if}
+
+            {if $paypal_switch eq 1}
+            <label class="form-selectgroup-item flex-fill">
+              <input type="radio" name="form-payment" value="paypal" class="form-selectgroup-input" id="paypal-input">
+              <div class="form-selectgroup-label d-flex align-items-center p-3">
+                <div class="me-3">
+                  <span class="form-selectgroup-check"></span>
+                </div>
+                <div>
+                  <span class="payment payment-provider-paypal payment-xs me-2"></span>
+                  <strong>Paypal</strong>
+                </div>
+              </div>
+            </label>
+            {/if}
+
+
+            {if $wx_switch eq 1}
+            <label class="form-selectgroup-item flex-fill">
+              <input type="radio" name="form-payment" value="weixin" class="form-selectgroup-input" id="weixin-input">
+              <div class="form-selectgroup-label d-flex align-items-center p-3">
+                <div class="me-3">
+                  <span class="form-selectgroup-check"></span>
+                </div>
+                <div>
+                  <span class="payment payment-provider-ukash payment-xs me-2"></span>
+                  <strong>微信支付</strong>
+                </div>
+              </div>
+            </label>
+            {/if}
+
+            {if $alipay_switch eq 1}
+            <label class="form-selectgroup-item flex-fill">
+              <input type="radio" name="form-payment" value="alipay" class="form-selectgroup-input" id="alipay-input">
+              <div class="form-selectgroup-label d-flex align-items-center p-3">
+                <div class="me-3">
+                  <span class="form-selectgroup-check"></span>
+                </div>
+                <div>
+                  <span class="payment payment-provider-alipay payment-xs me-2"></span>
+                  <strong>支付宝</strong>
+                </div>
+              </div>
+            </label>
+            {/if}
+
+
+          </div>
+        </div>
+      
+        <div class="modal-footer">
+          <a href="#" class="btn btn-success ms-0" style="display:none;" target="_blank" onclick="javascript:location.reload();" id="paid_btn">
+           已经支付
+          </a>
+
+
+          <a href="/usdt/pay?type=1&book_id={$data[0]['id']}" id="pay-btn" class="btn btn-primary ms-0" target="_blank">
+           马上支付
+          </a>
+        </div>
+      </div>
+      {else}  
+      <div class="modal-header">
+        <h2 class="modal-title  fw-bolder">用户登录</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+     
+        <div class="card card-md">
+          <div class="card-body">
+            <h2 class="h2 text-center mb-4">请先登录</h2>
+            <form action="/user/login_post?ref={$return_referer_url}" method="post">
+              <div class="mb-3">
+                <label class="form-label">用户名</label>
+                <input type="text" class="form-control" placeholder="Your username" name="username" autocomplete="off">
+              </div>
+              <div class="mb-2">
+                <label class="form-label">
+                  密码
+                  
+                </label>
+                <div class="input-group input-group-flat">
+                  <input type="password" id="pwd" name="password" class="form-control" placeholder="Your password" autocomplete="off">
+                  <span class="input-group-text">
+                    <a href="#" class="link-secondary" id="eye" data-bs-toggle="tooltip" aria-label="Show password" data-bs-original-title="Show password">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path></svg>
+                    </a>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-footer">
+                <button type="submit" class="btn btn-primary w-100">登录</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="text-center text-muted mt-3 mb-4">
+          还没有账户? <a href="/user/register?ref={$return_referer_url}" tabindex="-1">点此注册</a>
+        </div>
+      {/if}
+
+
+
+
+    </div>
+  </div>
+</div>
+{if $user_status eq 1}
+<script language="javascript">
+  $(document).ready(function(){
+      
+        $("#usdt-input").click(function(){
+            if($(this).is(":checked")){
+                $("#pay-btn").attr("href","/usdt/pay?type=1&book_id={$data[0]['id']}")
+            }
+        });
+
+
+      $("#paypal-input").click(function(){
+          if($(this).is(":checked")){
+            if($(this).is(":checked")){
+              $("#pay-btn").attr("href","/index.php/epay/submit?type=1&book_id={$data[0]['id']}&pay_type=paypal")
+          }
+          }
+      });
+
+      $("#weixin-input").click(function(){
+          if($(this).is(":checked")){
+            if($(this).is(":checked")){
+              $("#pay-btn").attr("href","/index.php/epay/submit?type=1&book_id={$data[0]['id']}&pay_type=wxpay")
+          }
+          }
+      });
+      $("#alipay-input").click(function(){
+          if($(this).is(":checked")){
+            if($(this).is(":checked")){
+              $("#pay-btn").attr("href","/index.php/epay/submit?type=1&book_id={$data[0]['id']}&pay_type=alipay")
+          }
+          }
+      });
+      $("#pay-btn").click(function(){
+          $("#paid_btn").show(200);
+      });
+  });
+</script>
+{else}
+
+
+
+
+
+{/if}
+{include file="/footer" /}

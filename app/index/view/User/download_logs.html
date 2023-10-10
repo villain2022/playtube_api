@@ -1,0 +1,60 @@
+{include file="/user_header" /}
+
+
+
+<div class="card">
+  <div class="row g-0">
+    <div class="col-md-3 border-end">
+      {include file="/User/user_center_left_menu" /}
+    </div>
+    <div class="col-md-9 d-flex flex-column">
+      <div class="card-body">
+        <div class="row row-cards">
+
+          <div class="col">
+            <h2 class="subheader">Download logs</h2>
+          </div>
+
+          <div class="card">
+
+
+            <div class="table-responsive">
+              <table class="table table-vcenter card-table">
+                <thead>
+                  <tr>
+                    <th>编号</th>
+                    <th>类型</th>
+                    <th>日期</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {if $download_log_count gt 0}
+                    {volist name="download_log" id="vo"}
+                    <tr>
+                      <td style="max-width: 300px;overflow: hidden;"><a href="/{$vo.book_id}.html" target="_blank">{$vo.title}</a></td>
+                      <td class="text-muted">{$vo.type}</td>
+                      <td class="text-muted">{$vo.timestamp|date="Y-m-d H:i:s"}</td>
+                    </tr>
+                    {/volist}
+                  {else}
+                    <tr><td>暂无数据</td></tr>
+                    
+                  {/if}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+
+              
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{include file="/footer" /}

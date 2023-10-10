@@ -1,0 +1,80 @@
+{include file="/user_header" /}
+
+<div class="card">
+  <div class="row g-0">
+    <div class="col-md-3 border-end">
+      {include file="/User/user_center_left_menu" /}
+    </div>
+    <div class="col-md-9 d-flex flex-column">
+      <div class="card-body">
+
+        <h2 class="subheader">Plans</h2>
+        <p class="text-muted mb-4"></p>
+        
+        <div class="col-12 mb-3">
+          <div class="card card-md">
+            <div class="card-body">
+              <div class="datagrid">
+                <div class="datagrid-item">
+                  <div class="datagrid-title">当前用户等级</div>
+                  <div class="datagrid-content  text-pink fw-bolder mt-3  mx-3">{$vip_data[$user_data[0]['level']]["vip_name"]}</div>
+                </div>
+                <div class="datagrid-item">
+                  <div class="datagrid-title">过期时间</div>
+                  <div class="datagrid-content mt-3  mx-3 {if $user_data[0]['level'] gt 0} text-success fw-bolder{/if}">{if $user_data[0]['level'] gt 0}{$user_data[0]['vip_expiration_time']|date="M d,Y"}{else}-{/if}</div>
+                </div>
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row row-cards">
+
+          {volist name="vip_data" id="vo"}
+          {if $vo.vip_level neq 0}
+          <div class="col-sm-6 col-lg-6">
+            <div class="card card-md">
+              {if $vo.recommand eq 1}
+              <div class="ribbon ribbon-top ribbon-bookmark bg-green">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                
+              </div>
+              {/if}
+              <div class="card-body text-center">
+                <div class="text-uppercase text-cyan font-weight-medium fw-bolder ">{$vo.vip_name}</div>
+                <div class="display-6 fw-bold my-3">${$vo.price}</div>
+                <ul class="list-unstyled lh-lg">
+                  <li class="my-3"><span class="badge bg-muted-lt p-1">{$vo.exprie_time|raw}</span></li>
+                  <li>
+                    每天可下载 {$vo.limit} 个VIP资源 
+                  </li>
+                  <li>
+                    <s>原价 {$vo.original_price}USD</s>
+                  </li>
+                  <li>
+                    部分资源免费下载
+                  </li>
+                </ul>
+                <div class="text-center mt-4">
+                  <a href="/usdt/pay?type=2&level={$vo.vip_level}" target="_blank" class="btn {if $vo.recommand eq 1}btn-green{/if} w-100">立即升级</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/if}
+          {/volist}
+        </div>
+
+
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+{include file="/footer" /}

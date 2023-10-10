@@ -1,0 +1,4 @@
+#2023
+rewrite ^/$ /index.php/book/index last;
+rewrite "^/video/(.*?)$" /index.php/index/video?video_id=$1 last;
+rewrite "^/thumb/(.*?)$" /index.php/index/thumb?video_id=$1 last;

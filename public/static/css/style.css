@@ -1,0 +1,14 @@
+﻿.card-img-top{
+    width:360px;
+    height:240px;
+    transition: .5s;
+    object-fit: cover;
+}
+.card-img-top:hover {
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+    transition: .3s ease-out 0s;
+}
+
+
+.content img { max-width: 100% !important; height: auto !important; margin: 10px auto !important; }

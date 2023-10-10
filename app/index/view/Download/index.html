@@ -1,0 +1,113 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>资源下载页</title>
+    <meta name="msapplication-TileColor" content=""/>
+    <meta name="theme-color" content=""/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+
+    {load href="/static/tabler/dist/css/tabler.min.css" /}
+    {load href="/static/tabler/dist/css/tabler-flags.min.css" /}
+    {load href="/static/tabler/dist/css/tabler-payments.min.css" /}
+    {load href="/static/tabler/dist/css/tabler-vendors.min.css" /}
+    {load href="/static/tabler/dist/js/tabler.min.js" /}
+    {load href="/static/js/jQuery.js" /}
+
+
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
+  </head>
+  <body  class=" d-flex flex-column">
+    <script src="/static/tabler/dist/js/demo-theme.min.js?1674944800"></script>
+    <div class="page page-center">
+      <div class="container container-tight py-4">
+        <div class="text-center mb-4">
+          <a href="/" class="navbar-brand navbar-brand-autodark"><img src="/static/tabler//static/logo.svg" height="36" alt=""></a>
+        </div>
+        <div class="card card-md">
+
+
+          <div class="card-body">
+  
+   
+
+            <div class="col-md-12 markdown">
+              <h4>资源信息:</h4>
+              <ul>
+                <li>名称:{$data[0]['title']}</li>
+                <li>编号:{$data[0]['id']}_{$data[0]['uuid']}</li>
+              
+              </ul>
+            </div>
+        
+
+            <div class="col-md-12 markdown mt-4">
+              <h4>下载链接:</h4>
+              <ul>
+   
+                {if $data[0]['pan_html'] neq ""}{$data[0]['pan_html']|raw}{/if}
+              </ul>
+              
+            </div>
+            <div class="col-md-12 markdown mt-4">
+              <h4>服务说明:</h4>
+              <ul>
+                如果链接均失效或无法下载请联系客服补发，添加微信客服: <strong class="text-red">{$wx_contact|raw}</strong> 或发信息至邮箱:<br/><strong class="text-red">{$email|raw}</strong>,  邮件内容请带上<strong class="text-blue">此下载页面截图和付款截图</strong>，核查无误后会将相关资源的有效链接发送至您邮箱。
+              </ul>
+              
+            </div>
+            <div class="col-md-12 markdown mt-4">
+              <h4>工作时间:</h4>
+              <ul>
+                8:00~12:00 14:00~22:00 &nbsp;&nbsp;&nbsp;时区:&nbsp;亚洲
+              </ul>
+              
+            </div>
+     
+
+          </div>
+        </div>
+        <div class="text-center  mt-3">
+          <a href="/{$data[0]['id']}.html"  class="text-muted">返回主页</a>
+        </div>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <!-- Tabler Core -->
+    <script src="/static/tabler/dist/js/tabler.min.js?1674944800" defer></script>
+    <script src="/static/tabler/dist/js/demo.min.js?1674944800" defer></script>
+
+    <script>
+      var eye = document.getElementById('eye');
+      var pwd = document.getElementById('pwd');
+      var flag = 0;
+      eye.onclick = function() {
+        if (flag == 0) {
+          pwd.type = 'text';
+          flag = 1;
+        } else {
+          pwd.type = 'password';
+          flag = 0;
+        }
+      }
+    </script>
+
+  </body>
+</html>
