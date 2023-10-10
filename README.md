@@ -247,7 +247,7 @@ CREATE TABLE `videos` (
 
 * 去google官方申请youtube的接口api，将申请好的api添加到playtube_api后台
 * 切换到playtube_api目录运行：php think youtube_search ，程序会自动根据关键词搜索入库youtube视频
-* keywords文件：/playtube_api/extend/keyword/keywords.txt  一行一个
+* keywords文件：/playtube_api/extend/keyword/keywords.txt  关键词一行一个
 
 
 ## 配置相关
